@@ -4,7 +4,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-const path = require("path");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -18,9 +18,12 @@ app.set("view engine", "handlebars");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Path static location
 app.use(express.static("public"));
+
+const connection = require("./config/connection");
 
 const routes = require("./controllers/newsRoutes.js");
 

@@ -1,5 +1,15 @@
 {{> header}}
 
 <div class="container">
-
+    <div id="body-sec" class="col-sm-12 col-md-10">
+        {{#each Article}} {{#unless favorited}} <div clas="row">
+            <h1>{{this.title}}</h1>
+            <br>
+            <p>{{this.subhead}}</p>
+            <br>
+            <a href="{{this.link}}">Read More</a>
+        </div>
+        {{/unless}}
+        {{/each}}
+    </div>
 </div>
