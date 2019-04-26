@@ -1,24 +1,34 @@
 <div class="page-header" id="news-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <h1>The News</h1>
-                <p>Get your daily dose of information</p>
-            </div>
-
-
-            <div class="col-sm-12 col-md-4" id="news-linkbar">
-                <a href="/">
-                    <img src="https://image.flaticon.com/icons/svg/25/25694.svg" height="25px" width="25px">
-                    Home </a>
-                <a href="/saved">
-                    <img src="https://image.flaticon.com/icons/png/512/14/14711.png" height="25px" width="25px">
-                    Saved Articles</a>
-            </div>
-            <div class="col-sm-12 col-md-4" id="news-toolbar">
+    <div class="row">
+        <div class="col-sm-12 col-md-3" id="news-title">
+            <h1>The News</h1>
+            <p>Get your daily dose of information</p>
+        </div>
+        <div class="col-sm-12 col-md-3" id="news-linkbar">
+            <a href="/">
+                <img src="https://image.flaticon.com/icons/svg/25/25694.svg" height="25px" width="25px">
+                Home </a>
+            <a href="/saved">
+                <img src="https://image.flaticon.com/icons/png/512/14/14711.png" height="25px" width="25px">
+                Saved Articles</a>
+        </div>
+        <div class="col-sm-12 col-md-6" id="news-toolbar">
+            <div class="btn-group">
+                <button id="news-drop" class="btn btn-lg dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"
+                        class="dropdown-toggle">
+                        <span id="selected">Select Your News Source</span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <p>Left-Leaning</p>
+                        <li bias="left" news-source="https://www.nytimes.com/">New York Times</li>
+                        <li bias="left" news-source="https://www.washingtonpost.com/">Washington Post</li>
+                        <div class="dropdown-divider"></div>
+                        <p>Right-Leaning</p>
+                        <li bias="right" news-source="https://www.foxnews.com/">Fox News</li>
+                        <li bias="right" news-source="https://www.dailywire.com/">Daily Wire</li>
+                    </ul>
+                </button>
                 <button type="button" class="btn btn-primary btn-lg">Scrape Articles</button>
                 <button type="button" class="btn btn-danger btn-lg">Clear Articles</button>
             </div>
         </div>
-    </div>
-</div>
