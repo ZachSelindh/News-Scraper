@@ -14,21 +14,24 @@
         </div>
         <div class="col-sm-12 col-md-6" id="news-toolbar">
             <div class="btn-group">
-                <button id="news-drop" class="btn btn-lg dropdown">
-                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"
-                        class="dropdown-toggle">
+                <button id="news-drop" class="btn btn-lg dropdown" data-toggle="dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" role="button" class="dropdown-toggle">
                         <span id="selected">Select Your News Source</span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <p>Left-Leaning</p>
                         <li bias="left" news-source="https://www.nytimes.com/">New York Times</li>
                         <li bias="left" news-source="https://www.washingtonpost.com/">Washington Post</li>
                         <div class="dropdown-divider"></div>
+                        <p>Centerist</p>
+                        <li bias="center" news-source="https://www.apnews.com/">Associated Press</li>
+                        <li bias="center" news-source="https://www.realclearpolitics.com/">RealClearPolitics</li>
+                        <div class="dropdown-divider"></div>
                         <p>Right-Leaning</p>
                         <li bias="right" news-source="https://www.foxnews.com/">Fox News</li>
                         <li bias="right" news-source="https://www.dailywire.com/">Daily Wire</li>
                     </ul>
                 </button>
-                <button type="button" class="btn btn-primary btn-lg">Scrape Articles</button>
-                <button type="button" class="btn btn-danger btn-lg">Clear Articles</button>
+                <button type="button" class="btn btn-success btn-lg">Scrape Articles</button>
+                <button type="button" class="btn btn-warning btn-lg">Clear Articles</button>
             </div>
         </div>
