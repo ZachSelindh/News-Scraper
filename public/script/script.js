@@ -1,4 +1,4 @@
-let newsSource;
+let newsSource = "";
 let newsBias;
 
 // Re-colors dropdown button for bias coloring.
@@ -22,8 +22,12 @@ $(".dropdown-menu li").click(function() {
 });
 
 $("#scrape-button").click(function() {
-  console.log(newsSource);
-  $.get("/scrape/" + newsSource + "", function(data, status) {
-    console.log("Data: " + data + " Status: " + status);
-  });
+  if (newsSource === "") {
+    console.log("No selection");
+  } else {
+    console.log(newsSource);
+    $.get("/scrape/" + newsSource, function(data, status) {
+      console.log("Scrape status: " + status);
+    });
+  }
 });

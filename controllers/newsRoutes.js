@@ -55,16 +55,25 @@ router.get("/scrape/nyt", function(req, res) {
       });
 
       db.Article.create(results)
-        .then(function(dbArticle) {
-          console.log(dbArticle);
-        })
+        .then(function(dbArticle) {})
         .catch(function(err) {
           console.log(err);
         });
     });
-    res.render("index", results);
-    console.log(results);
   });
+});
+
+router.get("/articles", function(req, res) {
+  db.Article.find({})
+    .then(function(dbArticle) {
+      var hbsObject = {
+        Articles: dbArticle
+      };
+      res.render("index", hbsObject);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
 });
 
 module.exports = router;
