@@ -96,7 +96,11 @@ router.get("/scrape/ap", function(req, res) {
           .children("h1")
           .text();
 
-        var subhead = $(element);
+        var subhead = $(element)
+          .children("a")
+          .children("div .content")
+          .children("p")
+          .text();
 
         // Find the h4 tag's parent a-tag, and save it's href value as "link"
         var link = $(element)
@@ -106,7 +110,7 @@ router.get("/scrape/ap", function(req, res) {
         // Make an object with data we scraped for this h4 and push it to the results array
         results.push({
           title,
-          /* subhead, */
+          subhead,
           link: "https://www.apnews.com" + link,
           articleSource
         });
