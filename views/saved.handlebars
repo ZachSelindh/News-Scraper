@@ -1,6 +1,34 @@
 {{> header}}
 
 <div class="container">
-
+    {{#if Articles}}
+    <div id="body-sec" class="col-12">
+        {{#each Articles}}
+        {{#if favorited}}
+        <div id="news-id-{{this._id}}" class="row news-item">
+            <div class="col-10">
+                <h1>{{this.title}}</h1>
+                <p>{{this.subhead}}</p>
+                <a target="_blank" href="{{this.link}}">Read More</a>
+            </div>
+            <div class="col-2">
+                <div class="row">
+                    <img id="fav-heart-{{this._id}}" title="Click to favorite article"
+                        src="https://cdn0.iconfinder.com/data/icons/christmas-set5/100/218-512.png" height="75px"
+                        width="75px">
+                    <img id="trash-{{this._id}}" title="Click to delete article"
+                        src="https://cdn2.iconfinder.com/data/icons/apple-classic/100/Apple_classic_10Icon_5px_grid-02-512.png"
+                        height="75px" width="75px">
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </div>
+    {{else}}
+    <div id="no-scrape-sec" class="col-sm-12 col-md-10">
+        <p id="no-scrape-p">You have not yet favorited any articles.</p>
+    </div>
+    {{/if}}
 
 </div>
