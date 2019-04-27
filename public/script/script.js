@@ -26,10 +26,8 @@ $("#scrape-button").click(function() {
     console.log("No selection");
   } else {
     console.log(newsSource);
-    $.get("/scrape/" + newsSource, function(data, status) {
-      console.log("Scrape status: " + status);
-    }).then(function() {
-      console.log("Works");
+    $.get("/scrape/" + newsSource).then(function() {
+      window.location.href = "/articles";
     });
   }
 });
