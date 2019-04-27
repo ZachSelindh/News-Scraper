@@ -28,6 +28,8 @@ $("#scrape-button").click(function() {
     console.log(newsSource);
     $.get("/scrape/" + newsSource, function(data, status) {
       console.log("Scrape status: " + status);
+    }).then(function() {
+      console.log("Works");
     });
   }
 });
