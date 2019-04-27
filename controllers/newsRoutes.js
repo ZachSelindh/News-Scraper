@@ -13,7 +13,18 @@ router.get("/", function(req, res) {
 });
 
 router.get("/saved", function(req, res) {
-  res.render("saved");
+  db.Article.find({
+    favorited: true
+  })
+    .then(function(dbArticle) {
+      var hbsObject = {
+        Articles: dbArticle
+      };
+      res.render("saved", hbsObject);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
 });
 
 router.get("/scrape/nyt", function(req, res) {
@@ -65,6 +76,38 @@ router.get("/scrape/nyt", function(req, res) {
   });
 });
 
+router.get("/scrape/dw", function(req, res) {
+  axios.get("https://www.dailywire.com/").then(function(response) {
+    var $ = cheerio.load(response.data);
+    $("article h2").each(function(i, element) {
+      // Save the text of the h4-tag as "title"
+      var results = [];
+      var articleSource = "DW";
+      var title = $(element).text();
+
+      // Find the h4 tag's parent a-tag, and save it's href value as "link"
+      var link = $(element)
+        .children()
+        .attr("href");
+
+      // Make an object with data we scraped for this h4 and push it to the results array
+      results.push({
+        title,
+        link: "https://www.dailywire.com/" + link,
+        articleSource
+      });
+
+      db.Article.create(results)
+        .then(function(dbArticle) {
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    });
+  });
+});
+
 router.get("/articles", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
@@ -76,6 +119,64 @@ router.get("/articles", function(req, res) {
     .catch(function(err) {
       res.json(err);
     });
+});
+
+router.get("/clear", function(req, res) {
+  db.Article.deleteMany({
+    favorited: false
+  })
+    .then(function(dbArticle) {
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+router.get("/fav/:id", function(req, res) {
+  let id = req.params.id;
+  db.Article.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      favorited: true
+    },
+    {
+      new: true,
+      useFindAndModify: false
+    },
+    function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/articles");
+      }
+    }
+  );
+});
+
+router.get("/unfav/:id", function(req, res) {
+  let id = req.params.id;
+  db.Article.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      favorited: false
+    },
+    {
+      new: true,
+      useFindAndModify: false
+    },
+    function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/saved");
+      }
+    }
+  );
 });
 
 module.exports = router;
