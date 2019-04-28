@@ -58,21 +58,23 @@ router.get("/scrape/nyt", function(req, res) {
         .parent()
         .attr("href");
 
-      // Make an object with data we scraped for this h4 and push it to the results array
-      results.push({
-        title,
-        subhead,
-        link: "https://www.nytimes.com/" + link,
-        articleSource
-      });
-
-      db.Article.create(results)
-        .then(function(dbArticle) {
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          console.log(err);
+      if (subhead === "") {
+      } else {
+        results.push({
+          title,
+          subhead,
+          link: "https://www.nytimes.com" + link,
+          articleSource
         });
+
+        db.Article.create(results)
+          .then(function(dbArticle) {
+            console.log(dbArticle);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      }
     });
   });
 });
@@ -139,7 +141,7 @@ router.get("/scrape/dw", function(req, res) {
       // Make an object with data we scraped for this h4 and push it to the results array
       results.push({
         title,
-        link: "https://www.dailywire.com/" + link,
+        link: "https://www.dailywire.com" + link,
         articleSource
       });
 
@@ -195,6 +197,9 @@ router.get("/fav/:id", function(req, res) {
     function(err, data) {
       if (err) {
         console.log(err);
+      } else {
+        console.log(data);
+        res.redirect("/articles");
       }
     }
   );
@@ -217,6 +222,7 @@ router.get("/unfav/:id", function(req, res) {
       if (err) {
         console.log(err);
       } else {
+        console.log(data);
         res.redirect("/saved");
       }
     }
