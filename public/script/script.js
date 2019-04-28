@@ -22,6 +22,9 @@ $(".dropdown-menu li").click(function() {
 });
 
 $("#scrape-button").click(function() {
+  $("#no-scrape-sec p").replaceWith(
+    "<p id='no-scrape-p'>Articles scraped! Click 'Articles' to see the results.</p>"
+  );
   if (newsSource === "") {
     console.log("No selection");
   } else {

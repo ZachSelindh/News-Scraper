@@ -68,7 +68,7 @@ router.get("/scrape/nyt", function(req, res) {
 
       db.Article.create(results)
         .then(function(dbArticle) {
-          /* console.log(dbArticle); */
+          console.log(dbArticle);
         })
         .catch(function(err) {
           console.log(err);
